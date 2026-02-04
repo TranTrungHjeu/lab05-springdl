@@ -58,10 +58,34 @@
                 <span class="student-count" th:text="${#lists.size(students)}">0</span>
             </h2>
 
+            <!-- Form tìm kiếm -->
+            <div class="search-section">
+                <form th:action="@{/}" method="get" class="search-form">
+                    <div class="search-input-wrapper">
+                        <i data-lucide="search" class="search-icon"></i>
+                        <input type="text" name="search" th:value="${searchKeyword}"
+                            placeholder="Tìm kiếm theo tên sinh viên..." class="search-input">
+                        <button type="submit" class="btn btn-search">
+                            Tìm kiếm
+                        </button>
+                    </div>
+                </form>
+                <!-- Hiển thị kết quả tìm kiếm -->
+                <div class="search-result" th:if="${searchKeyword != null}">
+                    <span>Kết quả tìm kiếm cho: <strong th:text="${searchKeyword}"></strong></span>
+                    <a th:href="@{/}" class="clear-search">
+                        <i data-lucide="x"></i>
+                        Xóa bộ lọc
+                    </a>
+                </div>
+            </div>
+
             <!-- Trạng thái trống -->
             <div class="empty-state" th:if="${#lists.isEmpty(students)}">
                 <i data-lucide="inbox" class="empty-state-icon"></i>
-                <p>Chưa có sinh viên nào trong hệ thống.</p>
+                <p th:if="${searchKeyword != null}">Không tìm thấy sinh viên nào với tên "<span
+                        th:text="${searchKeyword}"></span>"</p>
+                <p th:unless="${searchKeyword != null}">Chưa có sinh viên nào trong hệ thống.</p>
             </div>
 
             <!-- Grid hiển thị sinh viên -->

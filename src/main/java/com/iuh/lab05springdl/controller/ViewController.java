@@ -18,8 +18,17 @@ public class ViewController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
-        List<Student> students = service.findAll();
+    public String index(@RequestParam(required = false) String search, Model model) {
+        List<Student> students;
+        
+        // Nếu có search param thì tìm theo tên, không thì lấy tất cả
+        if (search != null && !search.trim().isEmpty()) {
+            students = service.findByName(search.trim());
+            model.addAttribute("searchKeyword", search);
+        } else {
+            students = service.findAll();
+        }
+        
         model.addAttribute("students", students);
         model.addAttribute("newStudent", new Student());
         return "index";
@@ -41,3 +50,4 @@ public class ViewController {
         return "redirect:/";
     }
 }
+
