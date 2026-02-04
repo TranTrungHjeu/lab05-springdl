@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'Chi tiết - ' + ${student.name}">Chi tiết sinh viên</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container detail-container">
+        <!-- Nút quay lại -->
+        <a th:href="@{/}" class="back-link">
+            <i data-lucide="arrow-left"></i>
+            <span>Quay lại danh sách</span>
+        </a>
+
+        <div class="detail-card">
+            <!-- Header với avatar -->
+            <div class="detail-header">
+                <div class="detail-avatar" th:text="${#strings.substring(student.name, 0, 1).toUpperCase()}">N</div>
+                <h1 class="detail-name" th:text="${student.name}">Nguyễn Văn A</h1>
+            </div>
+
+            <!-- Thông tin chi tiết -->
+            <div class="detail-info">
+                <div class="info-row">
+                    <div class="info-icon">
+                        <i data-lucide="hash"></i>
+                    </div>
+                    <div class="info-content">
+                        <span class="info-label">Mã sinh viên</span>
+                        <span class="info-value" th:text="${student.id}">1</span>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">
+                        <i data-lucide="user"></i>
+                    </div>
+                    <div class="info-content">
+                        <span class="info-label">Họ và tên</span>
+                        <span class="info-value" th:text="${student.name}">Nguyễn Văn A</span>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">
+                        <i data-lucide="mail"></i>
+                    </div>
+                    <div class="info-content">
+                        <span class="info-label">Email</span>
+                        <span class="info-value" th:text="${student.email}">email@example.com</span>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">
+                        <i data-lucide="calendar"></i>
+                    </div>
+                    <div class="info-content">
+                        <span class="info-label">Tuổi</span>
+                        <span class="info-value" th:text="${student.age} + ' tuổi'">20 tuổi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
